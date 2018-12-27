@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "771421630072",
+    "firebase_url": "https://dawak-d5e88.firebaseio.com",
+    "project_id": "dawak-d5e88",
+    "storage_bucket": "dawak-d5e88.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:771421630072:android:b4a4439f469c15a0",
+        "android_client_info": {
+          "package_name": "com.example.user.dawak"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "771421630072-g9h070n8ln88p1a84tn7f6h45fod9qei.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.user.dawak",
+            "certificate_hash": "295c5f5ddd337043df9d36d1359a5240bf4a9df3"
+          }
+        },
+        {
+          "client_id": "771421630072-5krjd9d1q3sienfst53e6ocvt8kir8o6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC6cKCnbQS4BFxGrMIiqMfvwtg1vvGhgO4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "771421630072-5krjd9d1q3sienfst53e6ocvt8kir8o6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
