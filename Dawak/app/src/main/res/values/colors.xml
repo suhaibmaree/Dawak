@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#0077c1</color>
+    <color name="colorPrimary">#00e676</color>
+    <color name="colorPrimaryDark">#00b248</color>
+    <color name="colorAccent">#66ffa6</color>
 
     <color name="White">#FFFFFF</color>
     <color name="Ivory">#FFFFF0</color>
@@ -31,8 +31,8 @@
     <color name="HotPink">#FF69B4</color>
     <color name="Tomato">#FF6347</color>
     <color name="OrangeRed">#FF4500</color>
-    <color name="DeepPink">#FF1493</color>
-    <color name="Fuchsia">#FF00FF</color>
+    <color name="DeepPink">#ff1493</color>
+    <color name="Fuchsia">#ff00ff</color>
     <color name="Magenta">#FF00FF</color>
     <color name="Red">#FF0000</color>
     <color name="OldLace">#FDF5E6</color>
@@ -48,7 +48,7 @@
     <color name="SandyBrown">#F4A460</color>
     <color name="Azure">#F0FFFF</color>
     <color name="Honeydew">#F0FFF0</color>
-    <color name="AliceBlue">#F0F8FF</color>
+    <color name="AliceBlue">#f0f8ff</color>
     <color name="Khaki">#F0E68C</color>
     <color name="LightCoral">#F08080</color>
     <color name="PaleGoldenrod">#EEE8AA</color>
@@ -69,19 +69,19 @@
     <color name="Chocolate">#D2691E</color>
     <color name="Peru">#CD853F</color>
     <color name="IndianRed">#CD5C5C</color>
-    <color name="MediumVioletRed">#C71585</color>
+    <color name="MediumVioletRed">#c71585</color>
     <color name="Silver">#C0C0C0</color>
     <color name="DarkKhaki">#BDB76B</color>
     <color name="RosyBrown">#BC8F8F</color>
-    <color name="MediumOrchid">#BA55D3</color>
+    <color name="MediumOrchid">#ba55d3</color>
     <color name="DarkGoldenrod">#B8860B</color>
     <color name="FireBrick">#B22222</color>
     <color name="PowderBlue">#B0E0E6</color>
     <color name="LightSteelBlue">#B0C4DE</color>
     <color name="PaleTurquoise">#AFEEEE</color>
     <color name="GreenYellow">#ADFF2F</color>
-    <color name="LightBlue">#ADD8E6</color>
-    <color name="DarkGray">#A9A9A9</color>
+    <color name="LightBlue">#e3f2fd</color>
+    <color name="DarkGray">#a9a9a9</color>
     <color name="Brown">#A52A2A</color>
     <color name="Sienna">#A0522D</color>
     <color name="YellowGreen">#9ACD32</color>
@@ -89,12 +89,12 @@
     <color name="PaleGreen">#98FB98</color>
     <color name="DarkViolet">#9400D3</color>
     <color name="MediumPurple">#9370DB</color>
-    <color name="LightGreen">#90EE90</color>
+    <color name="LightGreen">#f1f8e9</color>
     <color name="DarkSeaGreen">#8FBC8F</color>
     <color name="SaddleBrown">#8B4513</color>
     <color name="DarkMagenta">#8B008B</color>
     <color name="DarkRed">#8B0000</color>
-    <color name="BlueViolet">#8A2BE2</color>
+    <color name="BlueViolet">#8a2be2</color>
     <color name="LightSkyBlue">#87CEFA</color>
     <color name="SkyBlue">#87CEEB</color>
     <color name="Gray">#808080</color>
@@ -118,11 +118,11 @@
     <color name="MediumTurquoise">#48D1CC</color>
     <color name="DarkSlateBlue">#483D8B</color>
     <color name="SteelBlue">#4682B4</color>
-    <color name="RoyalBlue">#4169E1</color>
+    <color name="RoyalBlue">#73e8ff</color>
     <color name="Turquoise">#40E0D0</color>
     <color name="MediumSeaGreen">#3CB371</color>
     <color name="LimeGreen">#32CD32</color>
-    <color name="DarkSlateGray">#2F4F4F</color>
+    <color name="DarkSlateGray">#616161</color>
     <color name="SeaGreen">#2E8B57</color>
     <color name="ForestGreen">#228B22</color>
     <color name="LightSeaGreen">#20B2AA</color>
@@ -142,6 +142,7 @@
     <color name="Blue">#0000FF</color>
     <color name="MediumBlue">#0000CD</color>
     <color name="DarkBlue">#00008B</color>
+    <color name="BlueGrey">#eceff1</color>
     <color name="Navy">#000080</color>
     <color name="Black">#000000</color>
 </resources>

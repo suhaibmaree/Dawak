@@ -63,6 +63,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         else
         if (v == signinText){
             //will open sign up activity
+            finish();
             Intent intent = new Intent(this,RegisterActivity.class);
             startActivity(intent);
 

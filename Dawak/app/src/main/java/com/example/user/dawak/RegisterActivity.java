@@ -61,6 +61,7 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
         else
             if (v == loginText){
             //will open login activity
+                finish();
                 Intent intent = new Intent(this,LoginActivity.class);
                 startActivity(intent);
 
