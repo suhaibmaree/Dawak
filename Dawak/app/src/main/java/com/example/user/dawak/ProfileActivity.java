@@ -24,6 +24,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -33,7 +34,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     private Button button;
     private FirebaseAuth firebaseAuth;
-
     private RecyclerView mRecyclerView;
     private DatabaseReference mDatabase;
     private List<Pill> mPills ;
@@ -46,7 +46,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = findViewById(R.id.fab);
         button = findViewById(R.id.logout);
         firebaseAuth = FirebaseAuth.getInstance();
 
@@ -73,8 +73,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             public void onClick(View view) {
 
                 Intent intent = new Intent(ProfileActivity.this,AddActivity.class);
-                Parcelable parcelable = (Parcelable) mPills;
-                intent.putExtra("pills",parcelable );
+                //intent.putExtra("pills", (Serializable) mPills);
                 startActivity(intent);
             }
         });
