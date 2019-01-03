@@ -30,7 +30,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     private TimePicker mTimePicker;
     private Button plusButton, minusButton ,addPillsButton;
     private TextView takenNumberText;
-    private int takenNumber = 0;
+    private int takenNumber = 1;
     private Pill pill;
     private DatabaseReference mDatabase;
     private FirebaseAuth mFirebaseAuth;
@@ -76,7 +76,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 
         }
         if (v == minusButton){
-            if (takenNumber > 0){
+            if (takenNumber > 1){
                 takenNumber--;
                 takenNumberText.setText(takenNumber+"");
             }
@@ -95,6 +95,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
             if (TextUtils.isEmpty(mPillName.getText())){
                 // pill name is empty
                 Toast.makeText(this,"Please enter pill name",Toast.LENGTH_SHORT).show();
+
             }
             else
                 if (TextUtils.isEmpty(mTakenDay.getText())){
@@ -102,9 +103,6 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
                     Toast.makeText(this,"Please enter your pill taken day",Toast.LENGTH_SHORT).show();
                 }
                 else{
-
-
-
                     String AM_PM ;
                     if(mTimePicker.getHour() < 12) {
                         AM_PM = "AM";

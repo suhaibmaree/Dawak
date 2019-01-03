@@ -1,5 +1,7 @@
 package com.example.user.dawak;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -10,9 +12,13 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -32,14 +38,13 @@ import java.util.List;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button button;
+
     private FirebaseAuth firebaseAuth;
     private RecyclerView mRecyclerView;
     private DatabaseReference mDatabase;
     private List<Pill> mPills ;
     private Adapter adapter;
-
-
+    private ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,8 +52,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_profile);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-        button = findViewById(R.id.logout);
         firebaseAuth = FirebaseAuth.getInstance();
+        progressDialog = new ProgressDialog(ProfileActivity.this);
 
         mPills = new ArrayList<>();
         if (firebaseAuth.getCurrentUser() ==null){
@@ -57,10 +62,19 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             startActivity(intent);
         }//end if
 
-        button.setOnClickListener(this);
         mDatabase = FirebaseDatabase.getInstance().getReference().child("pills");
         mDatabase.keepSynced(true);
+
+        progressDialog.show();
         getData();
+        if (mPills != null){
+            progressDialog.dismiss();
+        }
+        else {
+            progressDialog.dismiss();
+            Toast.makeText(ProfileActivity.this, "Fetching Data Failed",Toast.LENGTH_SHORT).show();
+        }
+
         //Recycler
         mRecyclerView = findViewById(R.id.pills_recycler);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -77,29 +91,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 startActivity(intent);
             }
         });
-
-////////////////////////////////////////////////////////////////////////////
-//        findViewById(R.id.test).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-////                Pill pill = new Pill();
-////                pill.setCurrentTime(System.currentTimeMillis());
-////                pill.setNumberOfTaken(2);
-////                pill.setTimeOfTaken(new Date().toString());
-////                pill.setPillName("p1");
-////
-////                mDatabase.child(FirebaseAuth.getInstance().getUid())
-////                        .push()
-////                        .setValue(pill)
-////                .addOnCompleteListener(new OnCompleteListener<Void>() {
-////                    @Override
-////                    public void onComplete(@NonNull Task<Void> task) {
-////                        Log.d("tag", "onComplete: "+task.isSuccessful());
-////                    }
-////                });
-//            }
-//        });
-/////////////////////////////////////////////////////////////////////////////
 
     }//end onCreat
 
@@ -128,13 +119,27 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     @Override
     public void onClick(View v) {
-        if (v == button){
-            firebaseAuth.signOut();
-            finish();
-            startActivity(new Intent(this,LoginActivity.class));
-
-        }//end if
 
     }//end onClick
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main,menu);
+        return true;
+    }// end onCreateOptionsMenu
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.history){
+            Intent intent = new Intent(ProfileActivity.this,HistoryActivity.class);
+            intent.putExtra("pills", (Serializable) mPills);
+            startActivity(intent);
+        }
+        if (item.getItemId() == R.id.logout) {
+            firebaseAuth.signOut();
+            finish();
+            startActivity(new Intent(this, LoginActivity.class));
+        }
+        return true;
+    }
 }//end class
