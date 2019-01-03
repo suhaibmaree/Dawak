@@ -54,24 +54,19 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         FloatingActionButton fab = findViewById(R.id.fab);
         firebaseAuth = FirebaseAuth.getInstance();
         progressDialog = new ProgressDialog(ProfileActivity.this);
-
         mPills = new ArrayList<>();
+        mDatabase = FirebaseDatabase.getInstance().getReference().child("pills");
+        mDatabase.keepSynced(true);
+        progressDialog.setMessage("Fetching Data");
+
         if (firebaseAuth.getCurrentUser() ==null){
             finish();
             Intent intent= new Intent(this,LoginActivity.class);
             startActivity(intent);
         }//end if
-
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("pills");
-        mDatabase.keepSynced(true);
-
-        progressDialog.show();
         getData();
-        if (mPills != null){
-            progressDialog.dismiss();
-        }
-        else {
-            progressDialog.dismiss();
+
+        if (mPills == null){
             Toast.makeText(ProfileActivity.this, "Fetching Data Failed",Toast.LENGTH_SHORT).show();
         }
 
@@ -87,7 +82,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             public void onClick(View view) {
 
                 Intent intent = new Intent(ProfileActivity.this,AddActivity.class);
-                //intent.putExtra("pills", (Serializable) mPills);
                 startActivity(intent);
             }
         });
@@ -96,17 +90,29 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     public void getData(){
 
+        progressDialog.show();
         mDatabase.child(FirebaseAuth.getInstance().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
+
                         while (iterator.hasNext()){
                             DataSnapshot ds = iterator.next();
                             Pill pill = ds.getValue(Pill.class);
-                            mPills.add(pill);
+
+                            //Check if the medicine date valid or ended to display
+
+                            Long num = new Long(pill.getNumberOfTaken());
+                            Long last = System.currentTimeMillis()/(60*60*24*1000);
+                            Long now = pill.getCurrentTime()/(60*60*24*1000);
+                            if (now - last < num) {
+                                mPills.add(pill);
+                            }//end if
                         }
+
                         adapter.notifyDataSetChanged();
+                        progressDialog.dismiss();
                     }
 
                     @Override
@@ -132,7 +138,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.history){
             Intent intent = new Intent(ProfileActivity.this,HistoryActivity.class);
-            intent.putExtra("pills", (Serializable) mPills);
             startActivity(intent);
         }
         if (item.getItemId() == R.id.logout) {
@@ -142,4 +147,5 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
         return true;
     }
+
 }//end class

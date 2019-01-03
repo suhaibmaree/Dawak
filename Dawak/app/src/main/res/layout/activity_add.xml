@@ -56,7 +56,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="@dimen/body_size"
                     android:text="@string/pill_name"
-                    tools:text="Pill Name"
+                    tools:text="Medicine Name"
                     android:layout_margin="@dimen/text_margin"
                     android:layout_weight="75"
                     />

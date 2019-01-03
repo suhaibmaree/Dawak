@@ -7,11 +7,9 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
@@ -94,13 +92,13 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 
             if (TextUtils.isEmpty(mPillName.getText())){
                 // pill name is empty
-                Toast.makeText(this,"Please enter pill name",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,"Please enter medicine name",Toast.LENGTH_SHORT).show();
 
             }
             else
                 if (TextUtils.isEmpty(mTakenDay.getText())){
                     // taken day is empty
-                    Toast.makeText(this,"Please enter your pill taken day",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,"Please enter your medicine taken day",Toast.LENGTH_SHORT).show();
                 }
                 else{
                     String AM_PM ;
@@ -130,6 +128,8 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
                                         if (task.isSuccessful()){
 
                                             Toast.makeText(AddActivity.this,"pill added successful",Toast.LENGTH_SHORT).show();
+                                            Intent intent = new Intent(AddActivity.this,ProfileActivity.class);
+                                            startActivity(intent);
                                         }
                                         else {
                                             Toast.makeText(AddActivity.this,"pill added failed",Toast.LENGTH_SHORT).show();

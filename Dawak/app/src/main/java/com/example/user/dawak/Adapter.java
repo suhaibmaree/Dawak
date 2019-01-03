@@ -17,8 +17,10 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
     private Context mContext;
     private List<Pill> mPillList;
 
-    public Adapter(List<Pill> pillList, ProfileActivity profileActivity) {
+    public Adapter(List<Pill> pillList,
+                   Context context) {
         this.mPillList = pillList;
+        mContext = context;
     }//end constructor
 
     public void setPillList(List<Pill> pillList, Context context) {
