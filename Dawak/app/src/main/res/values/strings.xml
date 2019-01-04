@@ -25,6 +25,8 @@
     <string name="write_pill_name_here">Write Medicine name here</string>
     <string name="history">History</string>
     <string name="log_out">Log out</string>
+    <string name="appwidget_text">Dawak</string>
+    <string name="add_widget">Add widget</string>
 
 
 </resources>

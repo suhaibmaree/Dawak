@@ -16,7 +16,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".RegisterActivity">
+        <activity android:name=".RegisterActivity"
+            android:launchMode="singleTop">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,15 +29,26 @@
             android:label="@string/title_activity_login" />
         <activity
             android:name=".ProfileActivity"
-            android:label="@string/title_activity_profile"/>
-
+            android:label="@string/title_activity_profile" />
         <activity
             android:name=".AddActivity"
-            android:label="@string/title_activity_add"/>
-
+            android:label="@string/title_activity_add" />
         <activity
             android:name=".HistoryActivity"
-            android:label="@string/title_activity_history"/>
+            android:label="@string/title_activity_history" />
+
+        <receiver android:name=".DawakWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/dawak_widget_info" />
+        </receiver>
+
+        <service android:name=".WidgetService"
+        android:exported="false"/>
     </application>
 
 </manifest>

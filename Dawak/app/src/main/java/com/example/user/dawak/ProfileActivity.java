@@ -95,7 +95,9 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                 .addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
                         Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
+                        String medicines = "Your medicines is \n";
 
                         while (iterator.hasNext()){
                             DataSnapshot ds = iterator.next();
@@ -108,11 +110,16 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                             Long now = pill.getCurrentTime()/(60*60*24*1000);
                             if (now - last < num) {
                                 mPills.add(pill);
+                                //Set String for widget
+                                medicines += "\n"+pill.getPillName()+" At "+pill.getTimeOfTaken()
+                                        +" On "+pill.getTakenDay();
                             }//end if
                         }
 
                         adapter.notifyDataSetChanged();
                         progressDialog.dismiss();
+                        WidgetService.startActionDisplay(ProfileActivity.this,medicines);
+
                     }
 
                     @Override
