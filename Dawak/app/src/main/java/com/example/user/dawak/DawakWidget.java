@@ -19,7 +19,7 @@ public class DawakWidget extends AppWidgetProvider {
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId, String medicine) {
-        Log.d("medic", medicine);
+       // Log.d("medic", medicine);
         medicines = medicine;
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.dawak_widget);
         views.setTextViewText(R.id.appwidget_text, medicine);

@@ -1,50 +1,44 @@
 package com.example.user.dawak;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.AsyncTaskLoader;
+import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
-public class ProfileActivity extends AppCompatActivity implements View.OnClickListener {
+public class ProfileActivity extends AppCompatActivity implements View.OnClickListener
+        ,LoaderManager.LoaderCallbacks<List<Pill>> {
 
 
     private FirebaseAuth firebaseAuth;
     private RecyclerView mRecyclerView;
-    private DatabaseReference mDatabase;
-    private List<Pill> mPills ;
+    private List<Pill> mPills = null ;
     private Adapter adapter;
-    private ProgressDialog progressDialog;
+    private String medicines = "Your medicines is ";
+    private int flag =0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,18 +47,15 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
         FloatingActionButton fab = findViewById(R.id.fab);
         firebaseAuth = FirebaseAuth.getInstance();
-        progressDialog = new ProgressDialog(ProfileActivity.this);
         mPills = new ArrayList<>();
-        mDatabase = FirebaseDatabase.getInstance().getReference().child("pills");
-        mDatabase.keepSynced(true);
-        progressDialog.setMessage("Fetching Data");
 
         if (firebaseAuth.getCurrentUser() ==null){
             finish();
             Intent intent= new Intent(this,LoginActivity.class);
             startActivity(intent);
         }//end if
-        getData();
+
+        getSupportLoaderManager().initLoader(R.id.pills_loader_id,null,this);
 
         if (mPills == null){
             Toast.makeText(ProfileActivity.this, "Fetching Data Failed",Toast.LENGTH_SHORT).show();
@@ -88,47 +79,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
 
     }//end onCreat
 
-    public void getData(){
 
-        progressDialog.show();
-        mDatabase.child(FirebaseAuth.getInstance().getUid())
-                .addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                        Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
-                        String medicines = "Your medicines is \n";
-
-                        while (iterator.hasNext()){
-                            DataSnapshot ds = iterator.next();
-                            Pill pill = ds.getValue(Pill.class);
-
-                            //Check if the medicine date valid or ended to display
-
-                            Long num = new Long(pill.getNumberOfTaken());
-                            Long last = System.currentTimeMillis()/(60*60*24*1000);
-                            Long now = pill.getCurrentTime()/(60*60*24*1000);
-                            if (now - last < num) {
-                                mPills.add(pill);
-                                //Set String for widget
-                                medicines += "\n"+pill.getPillName()+" At "+pill.getTimeOfTaken()
-                                        +" On "+pill.getTakenDay();
-                            }//end if
-                        }
-
-                        adapter.notifyDataSetChanged();
-                        progressDialog.dismiss();
-                        WidgetService.startActionDisplay(ProfileActivity.this,medicines);
-
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
-
-    }//end getData method
 
     @Override
     public void onClick(View v) {
@@ -155,4 +106,71 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         return true;
     }
 
+    @NonNull
+    @Override
+    public Loader<List<Pill>> onCreateLoader(int i, final Bundle bundle) {
+        return new AsyncTaskLoader<List<Pill>>(this) {
+            final ProgressBar progressBar = findViewById(R.id.progress_bar);
+            @Nullable
+            @Override
+            public List<Pill> loadInBackground() {final List<Pill> pills= new ArrayList<>();
+
+                DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference().child("pills");
+                progressBar.setVisibility(View.VISIBLE);
+
+                mDatabase.child(FirebaseAuth.getInstance().getUid())
+                        .addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                                Iterator<DataSnapshot> iterator = dataSnapshot.getChildren().iterator();
+                                while (iterator.hasNext()){
+                                    DataSnapshot ds = iterator.next();
+                                    Pill pill = ds.getValue(Pill.class);
+
+                                    //Check if the medicine date valid or ended to display
+                                    Long num = new Long(pill.getNumberOfTaken());
+                                    Long last = System.currentTimeMillis()/(60*60*24*1000);
+                                    Long now = pill.getCurrentTime()/(60*60*24*1000);
+                                    if (now - last < num) {
+                                        mPills.add(pill);
+                                        //Set String for widget
+                                        medicines += "\n"+pill.getPillName()+" At "+pill.getTimeOfTaken()
+                                                +" On "+pill.getTakenDay();
+                                    }//end if
+                                }
+
+                                adapter.notifyDataSetChanged();
+                                WidgetService.startActionDisplay(ProfileActivity.this,medicines);
+                                progressBar.setVisibility(View.INVISIBLE);
+                                flag=1;
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+
+                return pills;
+            }
+
+            @Override
+            protected void onStartLoading() {
+                if (flag==0) {
+                    forceLoad();
+                }
+            }
+        };
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<List<Pill>> loader, List<Pill> pills) {
+
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<List<Pill>> loader) {
+
+    }
 }//end class
