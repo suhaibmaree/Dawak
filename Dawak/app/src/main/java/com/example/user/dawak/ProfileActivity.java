@@ -77,7 +77,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             }
         });
 
-    }//end onCreat
+    }//end onCreate
 
 
 

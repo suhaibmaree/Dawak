@@ -43,7 +43,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
                     android:background="@color/colorPrimaryDark"
-                    android:layout_below="@id/time"></LinearLayout>
+                    android:layout_below="@id/time"
+                    android:orientation="horizontal"></LinearLayout>
 
 
                 <ImageView
@@ -54,6 +55,7 @@
                     android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_below="@+id/line"
+                    android:contentDescription="@string/icon"
                     />
 
                 <TextView
@@ -66,7 +68,7 @@
                     android:layout_marginLeft="4dp"
                     android:layout_marginTop="4dp"
                     android:layout_toRightOf="@+id/card_image"
-                    android:paddingLeft="16dp"
+                    android:paddingStart="16dp"
                     android:textSize="32sp"
                     tools:text="Medicine Name" />
 

@@ -27,6 +27,8 @@
     <string name="log_out">Log out</string>
     <string name="appwidget_text">Dawak</string>
     <string name="add_widget">Add widget</string>
+    <string name="icon">Icon</string>
+    <string name="logo">Logo</string>
 
 
 </resources>
