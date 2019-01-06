@@ -33,7 +33,8 @@
             android:configChanges="orientation|screenSize|keyboardHidden"/>
         <activity
             android:name=".AddActivity"
-            android:label="@string/title_activity_add" />
+            android:label="@string/title_activity_add"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".HistoryActivity"
             android:label="@string/title_activity_history" />

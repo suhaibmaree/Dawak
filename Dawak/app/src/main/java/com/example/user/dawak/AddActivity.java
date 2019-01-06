@@ -60,8 +60,8 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         minusButton.setOnClickListener(this);
         addPillsButton.setOnClickListener(this);
         takenNumberText.setText(takenNumber+"");
-        toolbar = findViewById(R.id.toolbar);
 
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         Glide.with(this)
