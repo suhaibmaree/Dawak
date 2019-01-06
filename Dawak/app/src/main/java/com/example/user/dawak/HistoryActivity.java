@@ -44,7 +44,7 @@ public class HistoryActivity extends AppCompatActivity implements LoaderManager.
         getSupportLoaderManager().initLoader(R.id.pills_loader_id,null,this);
 
         if (mPills == null){
-            Toast.makeText(HistoryActivity.this, "Fetching Data Failed",Toast.LENGTH_SHORT).show();
+            Toast.makeText(HistoryActivity.this, getResources().getString(R.string.Fetching_Data_Failed),Toast.LENGTH_SHORT).show();
         }
 
         //Recycler

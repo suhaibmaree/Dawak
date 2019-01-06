@@ -29,6 +29,22 @@
     <string name="add_widget">Add widget</string>
     <string name="icon">Icon</string>
     <string name="logo">Logo</string>
+    <string name="email_mes">Please enter your Email</string>
+    <string name="pass_mes">Please enter your Password</string>
+    <string name="dialog_mes">Logging in, Please waite.</string>
+    <string name="success_mes">User logged in successfully</string>
+    <string name="fail_mes">Could not Login. Please try again</string>
+    <string name="reg_mes">Registering User, please wait.</string>
+    <string name="reg_success_mes">Registered successfully</string>
+    <string name="reg_fail_mes">Could not register. Please try again</string>
+    <string name="add_float_button">Add Float Button</string>
+    <string name="med">Your medicines is</string>
+    <string name="Fetching_Data_Failed">Fetching Data Failed</string>
+    <string name="enter_med">Please enter medicine name</string>
+    <string name="enter_med_taken">Please enter your medicine taken day</string>
+    <string name="pill_added_suc">pill added successful</string>
+    <string name="pill_add_fail">pill added failed</string>
+    <string name="Taken_Day_is">Taken Day is </string>
 
 
 </resources>

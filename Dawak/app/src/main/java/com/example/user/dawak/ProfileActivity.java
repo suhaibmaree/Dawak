@@ -1,5 +1,6 @@
 package com.example.user.dawak;
 
+import android.app.ActivityOptions;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
@@ -37,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     private RecyclerView mRecyclerView;
     private List<Pill> mPills = null ;
     private Adapter adapter;
-    private String medicines = "Your medicines is ";
+    private String medicines ;
     private int flag =0;
 
     @Override
@@ -48,6 +49,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         FloatingActionButton fab = findViewById(R.id.fab);
         firebaseAuth = FirebaseAuth.getInstance();
         mPills = new ArrayList<>();
+        medicines = getResources().getString(R.string.med);
 
         if (firebaseAuth.getCurrentUser() ==null){
             finish();
@@ -58,7 +60,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         getSupportLoaderManager().initLoader(R.id.pills_loader_id,null,this);
 
         if (mPills == null){
-            Toast.makeText(ProfileActivity.this, "Fetching Data Failed",Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProfileActivity.this, getResources().getString(R.string.Fetching_Data_Failed),Toast.LENGTH_SHORT).show();
         }
 
         //Recycler
@@ -73,7 +75,12 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
             public void onClick(View view) {
 
                 Intent intent = new Intent(ProfileActivity.this,AddActivity.class);
-                startActivity(intent);
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    Bundle bundle = ActivityOptions.makeSceneTransitionAnimation(ProfileActivity.this).toBundle();
+                    startActivity(intent, bundle);
+                } else {
+                    startActivity(intent);
+                }
             }
         });
 

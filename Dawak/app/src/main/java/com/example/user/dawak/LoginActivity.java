@@ -78,17 +78,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         if (TextUtils.isEmpty(email)){
             //email is empty
-            Toast.makeText(this,"Please enter your Email",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,getString(R.string.email_mes),Toast.LENGTH_SHORT).show();
             return;
 
         }
         if (TextUtils.isEmpty(password)){
             // password is empty
-            Toast.makeText(this,"Please enter your Password",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,getString(R.string.pass_mes),Toast.LENGTH_SHORT).show();
             return;
 
         }
-        progressDialog.setMessage("Logging in, Please waite.");
+        progressDialog.setMessage(getString(R.string.dialog_mes));
         progressDialog.show();
         firebaseAuth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -98,13 +98,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         if (task.isSuccessful()){
                             //user is successfully logged in
                             //start mainActivity
-                            Toast.makeText(LoginActivity.this," User logged in successfully",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,getString(R.string.success_mes),Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(LoginActivity.this,ProfileActivity.class);
                             startActivity(intent);
 
                         }//end if
                         else {
-                            Toast.makeText(LoginActivity.this,"Could not Login. Please try again",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(LoginActivity.this,getString(R.string.fail_mes),Toast.LENGTH_SHORT).show();
 
 
                         }//end else

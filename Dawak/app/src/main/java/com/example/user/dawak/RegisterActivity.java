@@ -76,19 +76,19 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
 
         if (TextUtils.isEmpty(email)){
             //email is empty
-            Toast.makeText(this,"Please enter your Email",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,getString(R.string.email_mes),Toast.LENGTH_SHORT).show();
             return;
 
         }
         if (TextUtils.isEmpty(password)){
             // password is empty
-            Toast.makeText(this,"Please enter your Password",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,getString(R.string.pass_mes),Toast.LENGTH_SHORT).show();
             return;
 
         }
 
         //if validate
-        progressDialog.setMessage("Registering User, please wait.");
+        progressDialog.setMessage(getString(R.string.reg_mes));
         progressDialog.show();
         firebaseAuth.createUserWithEmailAndPassword(email,password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -98,13 +98,13 @@ public class RegisterActivity extends AppCompatActivity implements View.OnClickL
                         if (task.isSuccessful()){
                             //user is successfully registered ang logged in
                             //start mainActivity
-                            Toast.makeText(RegisterActivity.this,"Registered successfully",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this,getString(R.string.reg_success_mes),Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
                             startActivity(intent);
 
                         }//end if
                         else {
-                            Toast.makeText(RegisterActivity.this,"Could not register. Please try again",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(RegisterActivity.this,getString(R.string.reg_fail_mes),Toast.LENGTH_SHORT).show();
 
 
                         }//end else

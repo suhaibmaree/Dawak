@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,6 +33,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     private Pill pill;
     private DatabaseReference mDatabase;
     private FirebaseAuth mFirebaseAuth;
+
 
 
     @Override
@@ -56,6 +58,7 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         minusButton.setOnClickListener(this);
         addPillsButton.setOnClickListener(this);
         takenNumberText.setText(takenNumber+"");
+
 
 
         Glide.with(this)
@@ -92,13 +95,13 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
 
             if (TextUtils.isEmpty(mPillName.getText())){
                 // pill name is empty
-                Toast.makeText(this,"Please enter medicine name",Toast.LENGTH_SHORT).show();
+                Toast.makeText(this,getString(R.string.enter_med),Toast.LENGTH_SHORT).show();
 
             }
             else
                 if (TextUtils.isEmpty(mTakenDay.getText())){
                     // taken day is empty
-                    Toast.makeText(this,"Please enter your medicine taken day",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this,getString(R.string.enter_med_taken),Toast.LENGTH_SHORT).show();
                 }
                 else{
                     String AM_PM ;
@@ -127,12 +130,12 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
                                         Log.d("tag", "onComplete: "+task.isSuccessful());
                                         if (task.isSuccessful()){
 
-                                            Toast.makeText(AddActivity.this,"pill added successful",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(AddActivity.this,getString(R.string.pill_added_suc),Toast.LENGTH_SHORT).show();
                                             Intent intent = new Intent(AddActivity.this,ProfileActivity.class);
                                             startActivity(intent);
                                         }
                                         else {
-                                            Toast.makeText(AddActivity.this,"pill added failed",Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(AddActivity.this,getString(R.string.pill_add_fail),Toast.LENGTH_SHORT).show();
 
                                         }
                                     }

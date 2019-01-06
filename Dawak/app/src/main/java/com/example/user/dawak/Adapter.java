@@ -38,10 +38,9 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull myViewHolder holder, int position) {
-
         holder.time.setText(mPillList.get(position).getTimeOfTaken());
         holder.pillName.setText(mPillList.get(position).getPillName());
-        holder.takenDay.setText("Taken Day is "+ mPillList.get(position).getTakenDay());
+        holder.takenDay.setText( mPillList.get(position).getTakenDay());
 
         Glide.with(holder.itemView.getContext())
                 .load(R.drawable.pill)
@@ -50,11 +49,7 @@ public class Adapter extends RecyclerView.Adapter<Adapter.myViewHolder> {
 
     @Override
     public int getItemCount() {
-        if (mPillList == null){
-            return 0;
-        }else {
-            return mPillList.size();
-        }
+        return (mPillList != null) ? mPillList.size():0;
     }
 
     public class myViewHolder extends RecyclerView.ViewHolder{

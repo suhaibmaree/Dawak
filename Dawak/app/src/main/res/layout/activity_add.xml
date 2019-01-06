@@ -26,6 +26,13 @@
                 android:scaleType="centerCrop"
                 android:contentDescription="@string/logo"
                 />
+            <android.support.v7.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                app:layout_collapseMode="pin"
+                app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+            </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.CollapsingToolbarLayout>
     </android.support.design.widget.AppBarLayout>
@@ -187,8 +194,8 @@
                 android:text="@string/add"
                 android:textColor="@color/Black"
                 android:textStyle="normal"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"/>
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"/>
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 
