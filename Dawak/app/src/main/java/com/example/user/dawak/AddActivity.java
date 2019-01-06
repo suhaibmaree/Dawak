@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
-import android.widget.Toolbar;
+import android.support.v7.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -33,6 +33,8 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
     private Pill pill;
     private DatabaseReference mDatabase;
     private FirebaseAuth mFirebaseAuth;
+    private Toolbar toolbar;
+
 
 
 
@@ -58,8 +60,9 @@ public class AddActivity extends AppCompatActivity implements View.OnClickListen
         minusButton.setOnClickListener(this);
         addPillsButton.setOnClickListener(this);
         takenNumberText.setText(takenNumber+"");
+        toolbar = findViewById(R.id.toolbar);
 
-
+        setSupportActionBar(toolbar);
 
         Glide.with(this)
                 .load(R.drawable.pill)

@@ -142,8 +142,8 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                                     if (now - last < num) {
                                         mPills.add(pill);
                                         //Set String for widget
-                                        medicines += "\n"+pill.getPillName()+" At "+pill.getTimeOfTaken()
-                                                +" On "+pill.getTakenDay();
+                                        medicines += "\n"+pill.getPillName()+getString(R.string.at)+pill.getTimeOfTaken()
+                                                +getString(R.string.on)+pill.getTakenDay();
                                     }//end if
                                 }
 

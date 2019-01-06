@@ -45,6 +45,8 @@
     <string name="pill_added_suc">pill added successful</string>
     <string name="pill_add_fail">pill added failed</string>
     <string name="Taken_Day_is">Taken Day is </string>
+    <string name="at">At</string>
+    <string name="on">On</string>
 
 
 </resources>
