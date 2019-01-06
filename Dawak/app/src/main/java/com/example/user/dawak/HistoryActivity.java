@@ -1,6 +1,7 @@
 package com.example.user.dawak;
 
 import android.app.ProgressDialog;
+import android.os.Parcelable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
@@ -32,6 +33,7 @@ public class HistoryActivity extends AppCompatActivity implements LoaderManager.
     private List<Pill> mPills ;
     private Adapter adapter;
     private int flag =0;
+    private LinearLayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +51,8 @@ public class HistoryActivity extends AppCompatActivity implements LoaderManager.
 
         //Recycler
         mRecyclerView = findViewById(R.id.pills_recycler1);
-        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
         adapter =new Adapter(mPills , HistoryActivity.this);
         mRecyclerView.setAdapter(adapter);
 
@@ -113,4 +116,5 @@ public class HistoryActivity extends AppCompatActivity implements LoaderManager.
     public void onLoaderReset(@NonNull Loader<List<Pill>> loader) {
 
     }
+
 }//end main class

@@ -37,7 +37,9 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".HistoryActivity"
-            android:label="@string/title_activity_history" />
+            android:label="@string/title_activity_history"
+            android:configChanges="orientation|screenSize|keyboardHidden"
+            />
 
         <receiver android:name=".DawakWidget">
             <intent-filter>
